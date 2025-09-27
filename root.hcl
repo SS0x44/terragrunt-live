@@ -15,7 +15,7 @@ generate "provider" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "aws" {
-  region = "${local.aws_region}"
+  region = "${local.region}"
   allowed_account_ids = ["${local.account_id}"]
 }
 EOF
@@ -27,7 +27,7 @@ remote_state {
     encrypt        = true
     bucket         = "${local.app_id}-${local.app_prifix}-${local.account_type}-terragrunt-tfstate${local.aws_region_short}"
     key            = "${path_relative_to_include()}/terrfrom.tfstate"
-    region         = local.aegion
+    region         = local.region
     use_lockfiles  = true
   }
   generate = {
