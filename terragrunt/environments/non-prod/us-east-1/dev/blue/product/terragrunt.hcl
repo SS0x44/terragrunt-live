@@ -1,14 +1,13 @@
-
-
 include "root" {
   path = find_in_parent_folders("root.hcl")
+  expose = true
 }
 
 include "stack" {
-  path = "${dirname(find_in_parent_folders("root.hcl"))}/stack/blue.hcl"
+  path = "${dirname(find_in_parent_folders("root.hcl"))}/stack/ec2.hcl"
   expose = true
 }
 
 terraform {
-  source = "${include.stack.locals.base_source_url}?ref=v0.8.0"
+  source = "${include.stack.locals.base_source_url}?ref=main"
 }
