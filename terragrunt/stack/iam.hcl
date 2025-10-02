@@ -1,13 +1,3 @@
-include "root" {
-  path = find_in_parent_folders("root.hcl")
-  expose = true
-}
-
-include "stack" {
-  path = "${dirname(find_in_parent_folders("root.hcl"))}/stack/iam.hcl"
-  expose = true
-}
-
-terraform {
-  source = "${include.stack.locals.base_source_url}?ref=main"
+locals {
+   base_source_url = "git::git@github.com:ss0x44/tf-modules.git//v${TF_VERSION}/aws_modules/iam"
 }
