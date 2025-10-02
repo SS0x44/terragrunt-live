@@ -1,3 +1,3 @@
 locals {
-   base_source_url = "git::git@github.com:ss0x44/tf-modules.git//v${TF_VERSION}/aws_modules/s3"
+   base_source_url = "git::git@github.com:ss0x44/tf-modules.git//v${TF_VERSION}/gcp-modules/cloud_storage"
 }
