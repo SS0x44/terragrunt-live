@@ -1,7 +1,15 @@
 locals {
   # Application-specific identifiers (can be overridden per module)
-  app_id     = ""
-  app_prefix = ""
+  app_id      = ""
+  app_prefix  = ""
+  global_tags = {
+   app_name    = ""
+   app-owner   = ""
+   cloud       = ""
+   managedBy   = ""
+   component   = ""
+   developedBy = ""
+  }
 }
 
 # Dynamically generate the AWS provider block with region and account restrictions
