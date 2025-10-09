@@ -10,7 +10,14 @@ locals {
    component   = ""
    developedBy = ""
   }
-}
+  # Load shared configuration values from pipeline .gitlab-ci.yml file variables sections
+  account_type   = get_env("ACCOUNT_TYPE")
+  account_id     = get_env("ACCOUNT_ID") 
+  region         = get_env("REGION")
+  region_short   = get_env("REGION_SHORT")
+  environment    = get_env("ENVIRONMENT")
+  deploy_color   = get_env("DEPLOY_STRATERGY")
+  tf_version     = get_env("TERRAFORM_VERSION")
 
 # Dynamically generate the AWS provider block with region and account restrictions
 generate "provider" {
@@ -30,7 +37,7 @@ remote_state {
   config = {
     encrypt       = true
     # Unique bucket name per app/env/account
-    bucket        = "${local.app_id}-${local.app_prefix}-${get_env("ACCOUNT_ID")}-terragrunt-tfstate-${get_env("REGION")}" 
+    bucket        = "${local.app_id}-${local.app_prefix}-${get_env("ACCOUNT_TYPE")}-terragrunt-tfstate-${get_env("REGION_SHORT")}" 
     # Path-based key for modular state separation
     key           = "${path_relative_to_include()}/terraform.tfstate" 
     region        = get_env("REGION")
