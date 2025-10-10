@@ -1,4 +1,4 @@
-# micro-service-00/ec2/terragrunt.hcl
+# micro-service-00/vpc/terragrunt.hcl
 
 include {
   path = find_in_parent_folders()
