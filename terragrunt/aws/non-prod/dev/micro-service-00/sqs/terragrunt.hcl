@@ -11,7 +11,7 @@ terraform {
 inputs = {
  sqs_queues = [
   {
-    name               = "queue_one"
+    name               = "queue"
     delay_seconds      = 0
     max_message_size   = 262144
     message_retention  = 86400
@@ -19,7 +19,7 @@ inputs = {
     receive_wait_time  = 0
   },
   {
-    name               = "queue_two"
+    name               = "queue"
     delay_seconds      = 5
     max_message_size   = 128000
     message_retention  = 345600
