@@ -37,10 +37,10 @@ inputs = {
     "ap-south-1b"
   ]
 
-  public_route_name    = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
-  public_igw_name      = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
-  private_route_name   = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
-  private_ngw_name     = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
+  public_route_name    = "${locals.app_id}-${locals.app_prefix}-public-route-${locals.env_short}-${locals.region_short}"
+  public_igw_name      = "${locals.app_id}-${locals.app_prefix}-igw-${locals.env_short}-${locals.region_short}"
+  private_route_name   = "${locals.app_id}-${locals.app_prefix}-private-route-${locals.env_short}-${locals.region_short}"
+  private_ngw_name     = "${locals.app_id}-${locals.app_prefix}-nategw-${locals.env_short}-${locals.region_short}"
 
   public_subnet_name   = [
     "${locals.app_id}-${locals.app_prefix}-public-01-${locals.env_short}-${locals.region_short}",
