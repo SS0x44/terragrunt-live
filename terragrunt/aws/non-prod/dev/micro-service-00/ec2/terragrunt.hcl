@@ -6,7 +6,6 @@ include "root" {
 locals {
   app_id        = include.root.locals.app_id
   app_prefix    = include.root.locals.app_prefix
-  app_user      = include.root.locals.app_user
   global_tags   = include.root.locals.global_tags 
   env_short     = include.root.locals.environment
   account_type  = include.root.locals.account_type
@@ -25,7 +24,7 @@ terraform {
 
 inputs = {
   account_id               = local.account_id
-  app_user                 = local.app_user
+  app_user                 = get_env("APP_USER")
   vpc_zone_identifiner     = "<placeholder-vpc-identifier>"
   vpc_name_tag             = "<placeholder-name-tag>"
   vpc_environmet_tag       = "<placeholder-env-tag>"
