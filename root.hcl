@@ -3,13 +3,14 @@ locals {
   app_id      = ""
   app_prefix  = ""
   global_tags = {
-   app_name    = ""
-   app-owner   = ""
-   cloud       = ""
-   managedBy   = ""
-   component   = ""
-   developedBy = ""
-  }
+   app_name         = ""
+   app_owner        = ""
+   managed_by       = ""
+   component        = ""
+   developed_by     = ""
+   cost_center      = ""
+   compliance       = ""
+} 
 
 # Dynamically generate the AWS provider block with region and account restrictions
 generate "provider" {
