@@ -1,0 +1,100 @@
+default:
+image: amazonlinux:latest
+tags: [app_linux01, app_linux02, app_linux03]
+
+include:
+  - project: 'ss0x44/shared-ci-templates'
+    file: '/templates/base.yml'
+    ref: 'main'
+    
+variables:
+ REGION: "ap-south-1"
+ REGION_SHORT: "aps1"
+ APP_USER: "ss0x44"
+ MICRO_SERVICE: 
+ description: "select service to deploy: 'micro-service-00'"
+ vaule: 'micro-service-00'
+  option:
+  - 'micro-service-00'
+ ACCOUNT_ID: 
+ description: "select the account no: '1234567890' '09875645213'"
+ vaule: '1234567890'
+  option:
+  - '1234567890'
+  - '09875645213'
+  
+  ACCOUNT_TYPE: 
+  description: "select the account type: 'non-prod' 'prod'"
+  vaule: 'non-prod'
+  option:
+  - 'non-prod' 
+  - 'prod'
+
+  DEPLOY_STRATERGY: 
+  description: "select the stretrgy : 'blue' 'green'"
+  vaule: 'blue'
+  option:
+  - 'blue' 
+  - 'green' 
+  
+  TERRAFORM_VERSION: 
+  description: "select the version: '1.13.3' '1.12.2'"
+  vaule: '1.13.3'
+  option:
+  - '1.13.3'
+  - '1.12.2'
+  
+  TERRAGRUNT_VERSION: 
+  description: "select the version: '0.88.1' '0.87.1'"
+  vaule: '0.88.1'
+  option:
+  - '0.88.1'
+  - '0.87.1'
+  
+  ENVIRONMENT: "dev"
+  description: "select the env to deploy: 'sandox' 'dev' 'qa' 'ppe' 'prd'"
+  vaule: '1234567890'
+  option:
+  - 'sandox'
+  - 'dev'
+  - 'qa'
+  - 'ppe'
+  - 'prd'
+  
+  TG_PATH: "terragrunt/aws/$ACCOUNT_TYPE/$ENVIRONMENT/$MICRO_SERVICE"
+ 
+.required_package: &required_package
+    - yum update -y
+    - yum install -y awscli python3 git jq wget unzip java-${JAVA_VERSION}-openjdk-devel
+    - curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+    - unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+    - mv terraform /usr/local/bin/
+    - curl -L https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -o terragrunt
+    - chmod +x terragrunt && mv terragrunt /usr/local/bin/
+    - curl -LO https://downloads.apache.org/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.zip
+    - unzip apache-maven-${MVN_VERSION}-bin.zip
+    - mv apache-maven-${MVN_VERSION} /opt/maven
+    - export PATH=$PATH:/opt/maven/bin
+    
+stages:
+  - plan
+  - apply
+  
+tg-plan:
+  stage: plan
+  extends: [.required_package]
+  script:
+    - terragrunt run-all plan --terragrunt-non-interactive --terragrunt-working-dir $TG_PATH
+  artifacts:
+    paths:
+      - plan-output.txt
+    expire_in: 1 day
+
+tg-apply:
+  stage: apply
+  extends: [.required_package]
+  script:
+    - terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir $TG_PATH
+  when: manual
+  environment:
+    name: $ENVIRONMENT
