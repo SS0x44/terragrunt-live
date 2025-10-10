@@ -9,5 +9,18 @@ terraform {
 }
 
 inputs = {
+ vpc_name            =
+ vpc_cidr            =
+ public_subnet_name  =
+ public_subnet_cidr  = 
+ public_route_name   =
+ public_azs          =
+ public_igw_name     =
+ private_subnet_name =
+ private_subnet_cidr =
+ private_route_name  =
+ private_azs         =
+ private_ngw_name    = 
+  
 
 }
