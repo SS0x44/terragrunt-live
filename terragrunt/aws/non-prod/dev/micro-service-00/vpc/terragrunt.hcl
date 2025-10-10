@@ -9,18 +9,50 @@ terraform {
 }
 
 inputs = {
- vpc_name            =
- vpc_cidr            =
- public_subnet_name  =
- public_subnet_cidr  = 
- public_route_name   =
- public_azs          =
- public_igw_name     =
- private_subnet_name =
- private_subnet_cidr =
- private_route_name  =
- private_azs         =
- private_ngw_name    = 
-  
+  vpc_name             = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
 
+  vpc_cidr             = ["10.0.0.0/16"]
+
+  public_subnet_cidr   = [
+    "10.0.1.0/24",
+    "10.0.2.0/24"
+  ]
+
+  private_subnet_cidr  = [
+    "10.0.11.0/24",
+    "10.0.12.0/24",
+    "10.0.21.0/24",
+    "10.0.22.0/24"
+  ]
+
+  public_azs           = [
+    "ap-south-1a",
+    "ap-south-1b"
+  ]
+
+  private_azs          = [
+    "ap-south-1a",
+    "ap-south-1b",
+    "ap-south-1a",
+    "ap-south-1b"
+  ]
+
+  public_route_name    = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
+  public_igw_name      = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
+  private_route_name   = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
+  private_ngw_name     = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
+
+  public_subnet_name   = [
+    "${locals.app_id}-${locals.app_prefix}-public-01-${locals.env_short}-${locals.region_short}",
+    "${locals.app_id}-${locals.app_prefix}-public-02-${locals.env_short}-${locals.region_short}"
+  ]
+
+  private_subnet_name  = [
+    "${locals.app_id}-${locals.app_prefix}-app-01-${locals.env_short}-${locals.region_short}",
+    "${locals.app_id}-${locals.app_prefix}-app-02-${locals.env_short}-${locals.region_short}",
+    "${locals.app_id}-${locals.app_prefix}-db-01-${locals.env_short}-${locals.region_short}",
+    "${locals.app_id}-${locals.app_prefix}-db-02-${locals.env_short}-${locals.region_short}"
+  ]
+
+  tags                 = locals.global_tags
 }
