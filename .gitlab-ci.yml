@@ -96,5 +96,3 @@ tg-apply:
   script:
     - terragrunt run-all apply --terragrunt-non-interactive --terragrunt-working-dir $TG_PATH
   when: manual
-  environment:
-    name: $ENVIRONMENT
