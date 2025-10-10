@@ -23,11 +23,11 @@ terraform {
 }
 
 inputs = {
-
+  account_id               = local.account_id
   vpc_zone_identifiner     = "<placeholder-vpc-identifier>"
   vpc_name_tag             = "<placeholder-name-tag>"
   vpc_environmet_tag       = "<placeholder-env-tag>"
-  pipeline_deployment_role = "<placeholder-role>"
+  pipeline_role            = "<placeholder-role>"
 
   ec2_name                 = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   ec2_profile              = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
