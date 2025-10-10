@@ -24,16 +24,16 @@ terraform {
 
 inputs = {
 
-  vpc_zone_identifiner     =
-  select_exisitng_vpc_id   =
-  pipeline_deployment_role =
+  vpc_zone_identifiner     = "<place-holder-vpc-identifier>"
+  select_exisitng_vpc_id   = "<place-holder-vpc-id>"
+  pipeline_deployment_role = "<place-holder-role>"
+
   ec2_name                 = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   ec2_profile              = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   security_group           = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   launch_template          = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   autoscale_group          = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   
-
   ami_name                  = "<place-holder-for-org-golden-image-pattern>"
   instance_type             = "<place-holder-for-reuired-compute-type>"
   health_check_internal     = 300
