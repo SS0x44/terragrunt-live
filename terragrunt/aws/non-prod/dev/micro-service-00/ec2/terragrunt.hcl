@@ -24,9 +24,10 @@ terraform {
 
 inputs = {
 
-  vpc_zone_identifiner     = "<place-holder-vpc-identifier>"
-  select_exisitng_vpc_id   = "<place-holder-vpc-id>"
-  pipeline_deployment_role = "<place-holder-role>"
+  vpc_zone_identifiner     = "<placeholder-vpc-identifier>"
+  vpc_name_tag             = "<placeholder-name-tag>"
+  vpc_environmet_tag       = "<placeholder-env-tag>"
+  pipeline_deployment_role = "<placeholder-role>"
 
   ec2_name                 = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   ec2_profile              = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
@@ -34,12 +35,12 @@ inputs = {
   launch_template          = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   autoscale_group          = "${locals.app_id}-${locals.app_prefix}-${locals.env_short}-${locals.region_short}"
   
-  ami_name                  = "<place-holder-for-org-golden-image-pattern>"
-  instance_type             = "<place-holder-for-reuired-compute-type>"
+  ami_name                  = "<placeholder-goldenimage-pattern>"
+  instance_type             = "<placeholder-compute-type>"
   health_check_internal     = 300
   health_check_type         = "EC2"
   max_size                  =  1
-  mix_size                  =  1
+  min_size                  =  1
   desired_capacity          =  1
   
   usr_data_tpl_path         = base64encode(templatefile("${path.module}/template/config.sh.tpl", {
@@ -52,6 +53,7 @@ inputs = {
     #latest version of all package install on your ec2 machine
   })
   ebs_optimized             = true
+  ebs_device_name           = "/dev/xvda"
   ebs_launch_tpl            = {
     volume_size             = 100
     volume_type             = "gp2"
