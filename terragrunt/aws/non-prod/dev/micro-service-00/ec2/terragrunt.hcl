@@ -43,15 +43,10 @@ inputs = {
   min_size                  =  1
   desired_capacity          =  1
   
-  usr_data_tpl_path         = base64encode(templatefile("${path.module}/template/config.sh.tpl", {
-    TERRAFORM_VERSION       = locals.tf_version
-    TERRAGRUNT_VERSION      = locals.tg_version
-    JAVA_VERSION            = locals.java_version
-    MVN_VERSION             = locals.mvn_version
-    REGION                  = locals.region
+  usr_data_tpl_path         = templatefile("${path.module}/template/config.sh.tpl")
+
     #add all paramter which you want to pass to userdata script in ec2 instace via cicd pipelinne gu dynamically to maintain 
     #latest version of all package install on your ec2 machine
-  })
   ebs_optimized             = true
   ebs_device_name           = "/dev/xvda"
   ebs_launch_tpl            = {
