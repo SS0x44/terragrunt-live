@@ -9,7 +9,7 @@ terraform {
 }
 
 inputs = {
-    name               = [ "${local.app_id}-${local.app_prefix}-queue02-${local.env_short}-${local.region_short}",
+    queue_name         = [ "${local.app_id}-${local.app_prefix}-queue02-${local.env_short}-${local.region_short}",
                           "${local.app_id}-${local.app_prefix}-queue01-${local.env_short}-${local.region_short}"
     delay_seconds      = [0,5]
     max_message_size   = [262144,128000]
